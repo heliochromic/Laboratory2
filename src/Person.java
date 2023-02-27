@@ -4,6 +4,8 @@ abstract class Person {
     public Person(String fullName){this.fullName = fullName;}
 
     public Person(){this("undefined_name");}
+    public abstract String toString();
+
 
 }
 
@@ -16,13 +18,13 @@ class Student extends Person{
     }
 
     public void setCourse(int course) {
-        while (true){
             if (course > 0 && course <= 6) {
                 this.course = course;
-                break;
+            } else {
+                System.out.println("Course can be only in range from 1 to 6");
+                this.course = 0;
             }
-            System.out.println("Course can be only in range from 1 to 6");
-        }
+
 
     }
 
@@ -37,7 +39,16 @@ class Student extends Person{
     public Student(String fullName, int course, int group){
         super(fullName);
         this.course = course;
-        this.group = group;
+        this.group = group; 
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "course=" + course +
+                ", group=" + group +
+                ", fullName='" + fullName + '\'' +
+                '}';
     }
 }
 
@@ -49,8 +60,19 @@ class Professor extends Person{
         this.discipline = discipline;
     }
 
+    public String getDiscipline() {
+        return discipline;
+    }
 
+    public void setDiscipline(String discipline) {
+        this.discipline = discipline;
+    }
 
-
-    //Write a method that fill an array with disciplines
+    @Override
+    public String toString() {
+        return "Professor{" +
+                "discipline='" + discipline + '\'' +
+                ", fullName='" + fullName + '\'' +
+                '}';
+    }
 }
