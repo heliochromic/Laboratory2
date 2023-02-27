@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.regex.Pattern;
 
 public class Department {
@@ -108,5 +109,49 @@ public class Department {
                 }
             }
         }
+    }
+    public Person[] sortByName(){
+        Person [] temp = this.people;
+        Arrays.sort(temp, Comparator.comparing(a -> a.fullName));
+        return temp;
+    }
+
+    public Student[] sortStudentsByGroup(){
+        Student[] temp = new Student[0];
+        for (Person p: this.people){
+            if (String.valueOf(p.getClass().getSimpleName()).equals("Professor")) continue;
+            Student[] lol = new Student[temp.length+1];
+            System.arraycopy(temp, 0,lol,0, temp.length);
+            lol[lol.length-1] = (Student) p;
+            temp = lol;
+        }
+        Arrays.sort(temp, Comparator.comparing(a -> a.group));
+        return temp;
+    }
+
+    public Student[] sortStudentsByCourse(){
+        Student[] temp = new Student[0];
+        for (Person p: this.people){
+            if (String.valueOf(p.getClass().getSimpleName()).equals("Professor")) continue;
+            Student[] lol = new Student[temp.length+1];
+            System.arraycopy(temp, 0,lol,0, temp.length);
+            lol[lol.length-1] = (Student) p;
+            temp = lol;
+        }
+        Arrays.sort(temp, Comparator.comparing(a -> a.course));
+        return temp;
+    }
+
+    public Professor[] sortProfessorByDiscipline(){
+        Professor[] temp = new Professor[0];
+        for (Person p: this.people){
+            if (String.valueOf(p.getClass().getSimpleName()).equals("Student")) continue;
+            Professor[] lol = new Professor[temp.length+1];
+            System.arraycopy(temp, 0,lol,0, temp.length);
+            lol[lol.length-1] = (Professor) p;
+            temp = lol;
+        }
+        Arrays.sort(temp, Comparator.comparing(a -> a.discipline));
+        return temp;
     }
 }
