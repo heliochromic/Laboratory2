@@ -47,14 +47,15 @@ public class Department {
         } while (doPositionEntered);
     }
 
-    public void removePerson(Person p) { //arraycopy: last destination index 4 out of bounds for object array[3]
+    public void removePerson(Person p) {
         Person[] tempArr = new Person[people.length - 1];
-        System.arraycopy(people, 0, tempArr, 0, people.length);
+        System.arraycopy(people, 0, tempArr, 0, tempArr.length-1);
+        //people = tempArr;
         int k = 0;
         for (Person person : people) {
             if (person.fullName.equals(p.fullName)) continue;
+            tempArr[k] = person;
             k++;
-            tempArr[k].fullName = person.fullName;
         }
         people = tempArr;
     }
