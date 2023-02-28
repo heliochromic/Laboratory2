@@ -1,29 +1,40 @@
 abstract class Person {
     String fullName;
 
-    public Person(String fullName){this.fullName = fullName;}
+    public Person(String fullName) {
+        this.fullName = fullName;
+    }
 
-    public Person(){this("undefined_name");}
+    public Person() {
+        this("undefined_name");
+    }
+
     public abstract String toString();
 
 
 }
 
-class Student extends Person{
-    int course;
-    int group;
+class Student extends Person {
+    private int course;
+    private int group;
+
+    public Student(String fullName, int course, int group) {
+        super(fullName);
+        this.course = course;
+        this.group = group;
+    }
 
     public int getCourse() {
         return course;
     }
 
     public void setCourse(int course) {
-            if (course > 0 && course <= 6) {
-                this.course = course;
-            } else {
-                System.out.println("Course can be only in range from 1 to 6");
-                this.course = 0;
-            }
+        if (course > 0 && course <= 6) {
+            this.course = course;
+        } else {
+            System.out.println("Course can be only in range from 1 to 6");
+            this.course = 0;
+        }
 
 
     }
@@ -36,12 +47,6 @@ class Student extends Person{
         this.group = group;
     }
 
-    public Student(String fullName, int course, int group){
-        super(fullName);
-        this.course = course;
-        this.group = group; 
-    }
-
     @Override
     public String toString() {
         return "Student{" +
@@ -52,10 +57,10 @@ class Student extends Person{
     }
 }
 
-class Professor extends Person{
-    String discipline;
+class Professor extends Person {
+    private String discipline;
 
-    public Professor(String fullName, String discipline){
+    public Professor(String fullName, String discipline) {
         super(fullName);
         this.discipline = discipline;
     }

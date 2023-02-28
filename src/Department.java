@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.regex.Pattern;
 
 public class Department {
-    public String name;
+    String name;
     public Person[] people = new Person[0];
 
     public Department(String name) {
@@ -50,7 +50,7 @@ public class Department {
 
     public void removePerson(Person p) {
         Person[] tempArr = new Person[people.length - 1];
-        System.arraycopy(people, 0, tempArr, 0, tempArr.length-1);
+        System.arraycopy(people, 0, tempArr, 0, tempArr.length - 1);
         //people = tempArr;
         int k = 0;
         for (Person person : people) {
@@ -110,48 +110,69 @@ public class Department {
             }
         }
     }
-    public Person[] sortByName(){
-        Person [] temp = this.people;
+
+    public Professor[] sortStudentsByName() {
+        Professor[] temp = new Professor[0];
+        for (Person p : this.people) {
+            if (String.valueOf(p.getClass().getSimpleName()).equals("Student")) continue;
+            Professor[] lol = new Professor[temp.length + 1];
+            System.arraycopy(temp, 0, lol, 0, temp.length);
+            lol[lol.length - 1] = (Professor) p;
+            temp = lol;
+        }
         Arrays.sort(temp, Comparator.comparing(a -> a.fullName));
         return temp;
     }
 
-    public Student[] sortStudentsByGroup(){
+    public Person[] sortByName() {
         Student[] temp = new Student[0];
-        for (Person p: this.people){
+        for (Person p : this.people) {
             if (String.valueOf(p.getClass().getSimpleName()).equals("Professor")) continue;
-            Student[] lol = new Student[temp.length+1];
-            System.arraycopy(temp, 0,lol,0, temp.length);
-            lol[lol.length-1] = (Student) p;
+            Student[] lol = new Student[temp.length + 1];
+            System.arraycopy(temp, 0, lol, 0, temp.length);
+            lol[lol.length - 1] = (Student) p;
             temp = lol;
         }
-        Arrays.sort(temp, Comparator.comparing(a -> a.group));
+        Arrays.sort(temp, Comparator.comparing(a -> a.fullName));
         return temp;
     }
 
-    public Student[] sortStudentsByCourse(){
+    public Student[] sortStudentsByGroup() {
         Student[] temp = new Student[0];
-        for (Person p: this.people){
+        for (Person p : this.people) {
             if (String.valueOf(p.getClass().getSimpleName()).equals("Professor")) continue;
-            Student[] lol = new Student[temp.length+1];
-            System.arraycopy(temp, 0,lol,0, temp.length);
-            lol[lol.length-1] = (Student) p;
+            Student[] lol = new Student[temp.length + 1];
+            System.arraycopy(temp, 0, lol, 0, temp.length);
+            lol[lol.length - 1] = (Student) p;
             temp = lol;
         }
-        Arrays.sort(temp, Comparator.comparing(a -> a.course));
+        Arrays.sort(temp, Comparator.comparing(Student::getGroup));
         return temp;
     }
 
-    public Professor[] sortProfessorByDiscipline(){
+    public Student[] sortStudentsByCourse() {
+        Student[] temp = new Student[0];
+        for (Person p : this.people) {
+            if (String.valueOf(p.getClass().getSimpleName()).equals("Professor")) continue;
+            Student[] lol = new Student[temp.length + 1];
+            System.arraycopy(temp, 0, lol, 0, temp.length);
+            lol[lol.length - 1] = (Student) p;
+            temp = lol;
+        }
+        Arrays.sort(temp, Comparator.comparing(Student::getCourse));
+        return temp;
+    }
+
+    public Professor[] sortProfessorByDiscipline() {
         Professor[] temp = new Professor[0];
-        for (Person p: this.people){
+        for (Person p : this.people) {
             if (String.valueOf(p.getClass().getSimpleName()).equals("Student")) continue;
-            Professor[] lol = new Professor[temp.length+1];
-            System.arraycopy(temp, 0,lol,0, temp.length);
-            lol[lol.length-1] = (Professor) p;
+            Professor[] lol = new Professor[temp.length + 1];
+            System.arraycopy(temp, 0, lol, 0, temp.length);
+            lol[lol.length - 1] = (Professor) p;
             temp = lol;
         }
-        Arrays.sort(temp, Comparator.comparing(a -> a.discipline));
+        Arrays.sort(temp, Comparator.comparing(Professor::getDiscipline));
         return temp;
     }
 }
