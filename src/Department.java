@@ -111,7 +111,7 @@ public class Department {
         }
     }
 
-    public Professor[] sortStudentsByName() {
+    public Professor[] sortProfessorsByName() {
         Professor[] temp = new Professor[0];
         for (Person p : this.people) {
             if (String.valueOf(p.getClass().getSimpleName()).equals("Student")) continue;
@@ -124,7 +124,7 @@ public class Department {
         return temp;
     }
 
-    public Person[] sortByName() {
+    public Student[] sortStudentsByName() {
         Student[] temp = new Student[0];
         for (Person p : this.people) {
             if (String.valueOf(p.getClass().getSimpleName()).equals("Professor")) continue;
@@ -173,6 +173,19 @@ public class Department {
             temp = lol;
         }
         Arrays.sort(temp, Comparator.comparing(Professor::getDiscipline));
+        return temp;
+    }
+
+    public Student[] getStudentsByCourse(int course){
+        Student[] temp = new Student[0];
+        for (Student s : this.sortStudentsByCourse()){
+            if (s.getCourse() != course) continue;
+            Student[] lol = new Student[temp.length + 1];
+            System.arraycopy(temp, 0, lol, 0, temp.length);
+            temp = lol;
+            temp[temp.length - 1] = s;
+        }
+
         return temp;
     }
 }
