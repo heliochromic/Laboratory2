@@ -109,7 +109,25 @@ public class Faculty {
         return temp;
     }
 
-
+    public Student[] getFacultyStudentsByCourse(int course){
+        Student[] temp = new Student[0];
+        for (Department d : this.departments){
+            Student[] a = d.sortStudentsByName();
+            int tempArrLength = temp.length + a.length;
+            Student[] lol = new Student[tempArrLength];
+            System.arraycopy(temp, 0, lol,0,temp.length);
+            System.arraycopy(a, 0, lol, temp.length, a.length);
+            temp = lol;
+        }
+        for (Student s : temp){
+            if (s.getCourse() != course) continue;
+            Student[] lol = new Student[temp.length + 1];
+            System.arraycopy(temp, 0, lol, 0, temp.length);
+            temp = lol;
+            temp[temp.length - 1] = s;
+        }
+        return temp;
+    }
 
 
 
