@@ -185,7 +185,6 @@ public class Department {
             temp = lol;
             temp[temp.length - 1] = s;
         }
-
         return temp;
     }
 }
