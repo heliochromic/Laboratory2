@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class Faculty {
@@ -36,5 +38,79 @@ public class Faculty {
             }
         }
     }
+
+    public Student[] sortFacultyStudentsByName() {
+        Student[] temp = new Student[0];
+        for (Department d : this.departments){
+            Student[] a = d.sortStudentsByName();
+            int tempArrLength = temp.length + a.length;
+            Student[] lol = new Student[tempArrLength];
+            System.arraycopy(temp, 0, lol,0,temp.length);
+            System.arraycopy(a, 0, lol, temp.length, a.length);
+            temp = lol;
+        }
+        Arrays.sort(temp, Comparator.comparing(a -> a.fullName));
+        return temp;
+    }
+
+    public Student[] sortFacultyStudentsByCourse() {
+        Student[] temp = new Student[0];
+        for (Department d : this.departments){
+            Student[] a = d.sortStudentsByName();
+            int tempArrLength = temp.length + a.length;
+            Student[] lol = new Student[tempArrLength];
+            System.arraycopy(temp, 0, lol,0,temp.length);
+            System.arraycopy(a, 0, lol, temp.length, a.length);
+            temp = lol;
+        }
+        Arrays.sort(temp, Comparator.comparing(Student::getCourse));
+        return temp;
+    }
+
+    public Student[] sortFacultyStudentsByGroup() {
+        Student[] temp = new Student[0];
+        for (Department d : this.departments){
+            Student[] a = d.sortStudentsByName();
+            int tempArrLength = temp.length + a.length;
+            Student[] lol = new Student[tempArrLength];
+            System.arraycopy(temp, 0, lol,0,temp.length);
+            System.arraycopy(a, 0, lol, temp.length, a.length);
+            temp = lol;
+        }
+        Arrays.sort(temp, Comparator.comparing(Student::getGroup));
+        return temp;
+    }
+
+    public Professor[] sortFacultyProfessorByName() {
+        Professor[] temp = new Professor[0];
+        for (Department d : this.departments){
+            Professor[] a = d.sortProfessorsByName();
+            int tempArrLength = temp.length + a.length;
+            Professor[] lol = new Professor[tempArrLength];
+            System.arraycopy(temp, 0, lol,0,temp.length);
+            System.arraycopy(a, 0, lol, temp.length, a.length);
+            temp = lol;
+        }
+        Arrays.sort(temp, Comparator.comparing(a -> a.fullName));
+        return temp;
+    }
+
+    public Professor[] sortFacultyProfessorByDiscipline() {
+        Professor[] temp = new Professor[0];
+        for (Department d : this.departments){
+            Professor[] a = d.sortProfessorsByName();
+            int tempArrLength = temp.length + a.length;
+            Professor[] lol = new Professor[tempArrLength];
+            System.arraycopy(temp, 0, lol,0,temp.length);
+            System.arraycopy(a, 0, lol, temp.length, a.length);
+            temp = lol;
+        }
+        Arrays.sort(temp, Comparator.comparing(Professor::getDiscipline));
+        return temp;
+    }
+
+
+
+
 
 }
