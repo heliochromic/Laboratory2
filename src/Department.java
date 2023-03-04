@@ -73,7 +73,7 @@ public class Department {
                                 System.out.print("Enter new name: ");
                                 p.fullName = DataInput.getString();
                             }
-                            case "course" -> {
+                            case "discipline" -> {
                                 System.out.print("Enter new course: ");
                                 Professor temp = (Professor) p;
                                 temp.setDiscipline(DataInput.getString());

@@ -1,28 +1,28 @@
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashMap;
+import java.util.regex.Pattern;
 
 public class Faculty {
     public String name;
     public Department[] departments = new Department[0];
 
-    public Faculty(String name){
+    public Faculty(String name) {
         this.name = name;
     }
 
-    public void addDepartment(Department d){
+    public void addDepartment(Department d) {
         Department[] tempArr = new Department[departments.length];
         System.arraycopy(departments, 0, tempArr, 0, departments.length);
         departments = tempArr;
-        departments[departments.length-1] = d;
+        departments[departments.length - 1] = d;
     }
 
-    public void removeDepartment(Department d){
-        Department[] tempArr = new Department[departments.length-1];
-        System.arraycopy(departments, 0, tempArr, 0, tempArr.length-1);
+    public void removeDepartment(Department d) {
+        Department[] tempArr = new Department[departments.length - 1];
+        System.arraycopy(departments, 0, tempArr, 0, tempArr.length - 1);
         int k = 0;
-        for (Department department : departments){
+        for (Department department : departments) {
             if (department.name.equals(d.name)) continue;
             tempArr[k] = department;
             k++;
@@ -31,8 +31,8 @@ public class Faculty {
     }
 
     public void editDepartment(Department d) throws IOException {
-        for (Department department:departments){
-            if (department.name.equals(d.name)){
+        for (Department department : departments) {
+            if (department.name.equals(d.name)) {
                 System.out.print("Enter new department name: ");
                 d.name = DataInput.getString();
             }
@@ -41,11 +41,11 @@ public class Faculty {
 
     public Student[] sortFacultyStudentsByName() {
         Student[] temp = new Student[0];
-        for (Department d : this.departments){
+        for (Department d : this.departments) {
             Student[] a = d.sortStudentsByName();
             int tempArrLength = temp.length + a.length;
             Student[] lol = new Student[tempArrLength];
-            System.arraycopy(temp, 0, lol,0,temp.length);
+            System.arraycopy(temp, 0, lol, 0, temp.length);
             System.arraycopy(a, 0, lol, temp.length, a.length);
             temp = lol;
         }
@@ -55,11 +55,11 @@ public class Faculty {
 
     public Student[] sortFacultyStudentsByCourse() {
         Student[] temp = new Student[0];
-        for (Department d : this.departments){
+        for (Department d : this.departments) {
             Student[] a = d.sortStudentsByName();
             int tempArrLength = temp.length + a.length;
             Student[] lol = new Student[tempArrLength];
-            System.arraycopy(temp, 0, lol,0,temp.length);
+            System.arraycopy(temp, 0, lol, 0, temp.length);
             System.arraycopy(a, 0, lol, temp.length, a.length);
             temp = lol;
         }
@@ -69,11 +69,11 @@ public class Faculty {
 
     public Student[] sortFacultyStudentsByGroup() {
         Student[] temp = new Student[0];
-        for (Department d : this.departments){
+        for (Department d : this.departments) {
             Student[] a = d.sortStudentsByName();
             int tempArrLength = temp.length + a.length;
             Student[] lol = new Student[tempArrLength];
-            System.arraycopy(temp, 0, lol,0,temp.length);
+            System.arraycopy(temp, 0, lol, 0, temp.length);
             System.arraycopy(a, 0, lol, temp.length, a.length);
             temp = lol;
         }
@@ -83,11 +83,11 @@ public class Faculty {
 
     public Professor[] sortFacultyProfessorByName() {
         Professor[] temp = new Professor[0];
-        for (Department d : this.departments){
+        for (Department d : this.departments) {
             Professor[] a = d.sortProfessorsByName();
             int tempArrLength = temp.length + a.length;
             Professor[] lol = new Professor[tempArrLength];
-            System.arraycopy(temp, 0, lol,0,temp.length);
+            System.arraycopy(temp, 0, lol, 0, temp.length);
             System.arraycopy(a, 0, lol, temp.length, a.length);
             temp = lol;
         }
@@ -97,11 +97,11 @@ public class Faculty {
 
     public Professor[] sortFacultyProfessorByDiscipline() {
         Professor[] temp = new Professor[0];
-        for (Department d : this.departments){
+        for (Department d : this.departments) {
             Professor[] a = d.sortProfessorsByName();
             int tempArrLength = temp.length + a.length;
             Professor[] lol = new Professor[tempArrLength];
-            System.arraycopy(temp, 0, lol,0,temp.length);
+            System.arraycopy(temp, 0, lol, 0, temp.length);
             System.arraycopy(a, 0, lol, temp.length, a.length);
             temp = lol;
         }
@@ -109,17 +109,17 @@ public class Faculty {
         return temp;
     }
 
-    public Student[] getFacultyStudentsByCourse(int course){
+    public Student[] getFacultyStudentsByCourse(int course) {
         Student[] temp = new Student[0];
-        for (Department d : this.departments){
+        for (Department d : this.departments) {
             Student[] a = d.sortStudentsByName();
             int tempArrLength = temp.length + a.length;
             Student[] lol = new Student[tempArrLength];
-            System.arraycopy(temp, 0, lol,0,temp.length);
+            System.arraycopy(temp, 0, lol, 0, temp.length);
             System.arraycopy(a, 0, lol, temp.length, a.length);
             temp = lol;
         }
-        for (Student s : temp){
+        for (Student s : temp) {
             if (s.getCourse() != course) continue;
             Student[] lol = new Student[temp.length + 1];
             System.arraycopy(temp, 0, lol, 0, temp.length);
@@ -129,6 +129,75 @@ public class Faculty {
         return temp;
     }
 
+    public Student findStudentByName(String name) {
+        for (Department department : this.departments) {
+            for (Person p : department.people) {
+                if (name.equals(p.fullName) &&
+                        String.valueOf(p.getClass()).split(Pattern.quote(" "))[1].equals("Student")) {
+                    return (Student) p;
+                }
+            }
+        }
+        return null;
+    }
 
+    public Professor findProfessorByName(String name) {
+        for (Department department : this.departments) {
+            for (Person p : department.people) {
+                if (name.equals(p.fullName) &&
+                        String.valueOf(p.getClass()).split(Pattern.quote(" "))[1].equals("Professor")) {
+                    return (Professor) p;
+                }
+            }
+        }
+        return null; //тута воно повертає null, в тестері треба кострукція if (findProfessor("bohdan") == null)
+        // {
+        //      System.out.println("This student doesn't exist);
+        // }
+    }
 
+    public Student[] findStudentByGroup(int group) {
+        Student[] temp = new Student[0];
+        for (Department department : this.departments) {
+            for (Person p : department.people) {
+                if (group == ((Student) p).getGroup() && String.valueOf(p.getClass()).split(Pattern.quote(" "))[1].equals("Student")) {
+                    int i = 1;
+                    i++;
+                    temp = new Student[i];
+                    temp[temp.length - 1] = (Student) p;
+                }
+            }
+        }
+        return temp;
+        // тут повернеться array, якщо пустий, то такого студента нема, якщо один, то просто його повернути
+        // як об'єкт аля s = Student[i], якщо пустий, то сказати, що воно пусте
+
+    }
+
+    public Student[] findStudentByCourse(int course) {
+        Student[] temp = new Student[0];
+        for (Department department : this.departments) {
+            for (Person p : department.people) {
+                if (course == ((Student) p).getCourse() && String.valueOf(p.getClass()).split(Pattern.quote(" "))[1].equals("Student")) {
+                    int i = 1;
+                    i++;
+                    temp = new Student[i];
+                    temp[temp.length - 1] = (Student) p;
+                }
+            }
+        }
+        return temp;
+    }
+
+    public Professor findProfessorByDiscipline(String discipline) {
+        for (Department department : this.departments) {
+            for (Person p : department.people) {
+                if (name.equals(((Professor) p).getDiscipline()) &&
+                        String.valueOf(p.getClass()).split(Pattern.quote(" "))[1].equals("Professor")) {
+                    return (Professor) p;
+                }
+            }
+        }
+        return null;
+    }
 }
