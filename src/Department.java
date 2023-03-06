@@ -26,12 +26,12 @@ public class Department {
         do {
             //String position = DataInput.getString();
             doPositionEntered = false;
-            switch (DataInput.getString()) {
+            switch (DataInput.getString("Do you want to enter \"student\" of \"professor\"")) {
                 case "student" -> {
                     Student temp = null;
-                    String fullName = DataInput.getString();
-                    int course = DataInput.getInt();
-                    int group = DataInput.getInt();
+                    String fullName = DataInput.getString("Enter full name");
+                    int course = DataInput.getInt("Enter course");
+                    int group = DataInput.getInt("Enter group");
                     //people[people.length - 1] = new Student(fullName, 0, group);
                     temp = new Student(fullName, 0, group);
                     temp.setCourse(course);
@@ -39,8 +39,8 @@ public class Department {
                 }
                 case "professor" -> {
                     Professor temp = null;
-                    String fullName = DataInput.getString();
-                    String discipline = DataInput.getString();
+                    String fullName = DataInput.getString("Enter full name");
+                    String discipline = DataInput.getString("Enter discipline name");
                     people[people.length - 1] = new Professor(fullName, discipline);
                 }
                 default -> doPositionEntered = true;
@@ -66,17 +66,14 @@ public class Department {
             if (person.fullName.equals(p.fullName)) {
                 switch (String.valueOf(person.getClass()).split(Pattern.quote(" "))[1]) {
                     case "Professor" -> {
-                        System.out.print("Which field in professor's information do you want to change(name, discipline): ");
-                        String field = DataInput.getString();
+                        String field = DataInput.getString("Which field in professor's information do you want to change(name, discipline): ");
                         switch (field) {
                             case "name" -> {
-                                System.out.print("Enter new name: ");
-                                p.fullName = DataInput.getString();
+                                p.fullName = DataInput.getString("Enter new name: ");
                             }
                             case "discipline" -> {
-                                System.out.print("Enter new course: ");
                                 Professor temp = (Professor) p;
-                                temp.setDiscipline(DataInput.getString());
+                                temp.setDiscipline(DataInput.getString("Enter new course: "));
                             }
                             default -> System.out.println("fuck you, can write method with first time");
                         }
@@ -84,23 +81,19 @@ public class Department {
                     }
                     case "Student" -> {
                         System.out.println(Arrays.toString(p.getClass().getDeclaredFields()));
-                        System.out.print("Which field in student's information do you want to change(name, course, group): ");
                         //method for choosing value and edit it
-                        String field = DataInput.getString();
+                        String field = DataInput.getString("Which field in student's information do you want to change(name, course, group): ");
                         switch (field) {
                             case "name" -> {
-                                System.out.print("Enter new name: ");
-                                p.fullName = DataInput.getString();
+                                p.fullName = DataInput.getString("Enter new name: ");
                             }
                             case "course" -> {
-                                System.out.print("Enter new course: ");
                                 Student temp = (Student) p;
-                                temp.setCourse(DataInput.getInt());
+                                temp.setCourse(DataInput.getInt("Enter new course: "));
                             }
                             case "group" -> {
-                                System.out.print("Enter new group: ");
                                 Student temp = (Student) p;
-                                temp.setGroup(DataInput.getInt());
+                                temp.setGroup(DataInput.getInt("Enter new group: "));
                             }
                             default -> System.out.println("fuck you, can write method with first time");
                         }

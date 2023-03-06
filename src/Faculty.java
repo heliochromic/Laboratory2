@@ -33,8 +33,7 @@ public class Faculty {
     public void editDepartment(Department d) throws IOException {
         for (Department department : departments) {
             if (department.name.equals(d.name)) {
-                System.out.print("Enter new department name: ");
-                d.name = DataInput.getString();
+                d.name = DataInput.getString("Enter new department name: ");
             }
         }
     }

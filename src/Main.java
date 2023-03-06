@@ -17,7 +17,6 @@ public class Main {
         //dp.editPerson(dp.people[1]);
 
         //System.out.println(dp.people[1]);
-        DataInput.getString();
 
         System.out.println(Arrays.toString(dp.people));
         dp.removePerson(dp.people[0]); //arraycopy: last destination index 4 out of bounds for object array[3]
