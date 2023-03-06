@@ -4,8 +4,8 @@ import java.util.Comparator;
 import java.util.regex.Pattern;
 
 public class Department {
-    String name;
     public Person[] people = new Person[0];
+    String name;
 
     public Department(String name) {
         this.name = name;
@@ -169,9 +169,9 @@ public class Department {
         return temp;
     }
 
-    public Student[] getStudentsByCourse(int course){
+    public Student[] getStudentsByCourse(int course) {
         Student[] temp = new Student[0];
-        for (Student s : this.sortStudentsByCourse()){
+        for (Student s : this.sortStudentsByCourse()) {
             if (s.getCourse() != course) continue;
             Student[] lol = new Student[temp.length + 1];
             System.arraycopy(temp, 0, lol, 0, temp.length);
@@ -179,5 +179,18 @@ public class Department {
             temp[temp.length - 1] = s;
         }
         return temp;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder temp = new StringBuilder("Department:" + name + "\n" + "List of students and professors:\n");
+        for (Person person : people) {
+            if (person.getClass().getSimpleName().equals("Student")) {
+                temp.append("Student: ").append(person.fullName).append(", course: ").append(((Student) person).getCourse()).append(", group: ").append(((Student) person).getGroup());
+            } else {
+                temp.append("Professor: ").append(person.fullName).append(", discipline: ").append(((Professor) person).getDiscipline());
+            }
+        }
+        return String.valueOf(temp);
     }
 }

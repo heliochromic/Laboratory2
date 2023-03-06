@@ -12,7 +12,7 @@ public class University {
     }
 
     public void addFaculty(Faculty f) {
-        Faculty[] tempArr = new Faculty[faculties.length];
+        Faculty[] tempArr = new Faculty[faculties.length + 1];
         System.arraycopy(faculties, 0, tempArr, 0, faculties.length);
         faculties = tempArr;
         faculties[faculties.length - 1] = f;
@@ -126,18 +126,18 @@ public class University {
         return temp;
     }
 
-    public Student findStudentByName(String name) {
+    public String findStudentByName(String name) {
         for (Faculty faculty : this.faculties){
             for (Department department : faculty.departments) {
                 for (Person p : department.people) {
                     if (name.equals(p.fullName) &&
                             String.valueOf(p.getClass()).split(Pattern.quote(" "))[1].equals("Student")) {
-                        return (Student) p;
+                        return "faculty: "+faculty.name+", department: " + department.name + ", student by name: " + p.fullName + ", course: " + ((Student) p).getCourse() + ", group: " + ((Student) p).getGroup();
                     }
                 }
             }
         }
-        return null;
+        return "Unfortunately, there is no student with such name";
     }
     public Student[] findStudentByGroup(int group) {
         Student[] temp = new Student[0];
@@ -173,19 +173,26 @@ public class University {
         }
         return temp;
     }
-    public Professor findProfessorByDiscipline(String discipline) {
+    public String findProfessorByDiscipline(String discipline) {
         for (Faculty faculty : this.faculties){
             for (Department department : faculty.departments) {
                 for (Person p : department.people) {
                     if (name.equals(((Professor) p).getDiscipline()) &&
                             String.valueOf(p.getClass()).split(Pattern.quote(" "))[1].equals("Professor")) {
-                        return (Professor) p;
+                        return "university: "+faculty.name+", department: " + department.name + ", professor by name: " + p.fullName + ", his/her discipline: " + ((Professor) p).getDiscipline();
                     }
                 }
             }
         }
-        return null;
+        return "Unfortunately, there is no professor with such name";
     }
 
-
+    @Override
+    public String toString() {
+        StringBuilder temp = new StringBuilder("University: " + name + "\n" + "Faculties:\n");
+        for (Faculty faculty : faculties){
+            temp.append(faculty.name).append("\n");
+        }
+        return String.valueOf(temp);
+    }
 }

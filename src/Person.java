@@ -49,11 +49,7 @@ class Student extends Person {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "course=" + course +
-                ", group=" + group +
-                ", fullName='" + fullName + '\'' +
-                '}';
+        return "student: " + fullName + " course: " + course + ", group: " + group;
     }
 }
 
@@ -75,9 +71,6 @@ class Professor extends Person {
 
     @Override
     public String toString() {
-        return "Professor{" +
-                "discipline='" + discipline + '\'' +
-                ", fullName='" + fullName + '\'' +
-                '}';
+        return "professor: " + fullName + " discipline: " + discipline;
     }
 }

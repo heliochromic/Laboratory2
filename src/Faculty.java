@@ -128,31 +128,28 @@ public class Faculty {
         return temp;
     }
 
-    public Student findStudentByName(String name) {
+    public String findStudentByName(String name) {
         for (Department department : this.departments) {
             for (Person p : department.people) {
                 if (name.equals(p.fullName) &&
                         String.valueOf(p.getClass()).split(Pattern.quote(" "))[1].equals("Student")) {
-                    return (Student) p;
+                    return "department: " + department.name + ", student by name: " + p.fullName + ", course: " + ((Student) p).getCourse() + ", group: " + ((Student) p).getGroup();
                 }
             }
         }
-        return null;
+        return "Unfortunately, there is no student with such name";
     }
 
-    public Professor findProfessorByName(String name) {
+    public String findProfessorByName(String name) {
         for (Department department : this.departments) {
             for (Person p : department.people) {
                 if (name.equals(p.fullName) &&
                         String.valueOf(p.getClass()).split(Pattern.quote(" "))[1].equals("Professor")) {
-                    return (Professor) p;
+                    return "department: " + department.name + ", professor by name: " + p.fullName + ", his/her discipline: " + ((Professor) p).getDiscipline();
                 }
             }
         }
-        return null; //тута воно повертає null, в тестері треба кострукція if (findProfessor("bohdan") == null)
-        // {
-        //      System.out.println("This student doesn't exist);
-        // }
+        return "Unfortunately, there is no professor with such name";
     }
 
     public Student[] findStudentByGroup(int group) {
@@ -170,7 +167,6 @@ public class Faculty {
         return temp;
         // тут повернеться array, якщо пустий, то такого студента нема, якщо один, то просто його повернути
         // як об'єкт аля s = Student[i], якщо пустий, то сказати, що воно пусте
-
     }
 
     public Student[] findStudentByCourse(int course) {
@@ -188,15 +184,24 @@ public class Faculty {
         return temp;
     }
 
-    public Professor findProfessorByDiscipline(String discipline) {
+    public String findProfessorByDiscipline(String discipline) {
         for (Department department : this.departments) {
             for (Person p : department.people) {
                 if (name.equals(((Professor) p).getDiscipline()) &&
                         String.valueOf(p.getClass()).split(Pattern.quote(" "))[1].equals("Professor")) {
-                    return (Professor) p;
+                    return "department: " + department.name + ", professor by name: " + p.fullName + ", his/her discipline: " + ((Professor) p).getDiscipline();
                 }
             }
         }
-        return null;
+        return "Unfortunately, there is no professor with such name";
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder temp = new StringBuilder("Faculty: " + name + "\n" + "Departments:\n");
+        for (Department department : departments) {
+            temp.append(department.name).append("\n");
+        }
+        return String.valueOf(temp);
     }
 }

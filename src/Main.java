@@ -22,10 +22,17 @@ public class Main {
         //dp.removePerson(dp.people[0]); //arraycopy: last destination index 4 out of bounds for object array[3]
         //System.out.println(Arrays.toString(dp.people));
 
-        Faculty[] ukma = {
-                new Faculty("FI")
 
-        };
+        University ukma = new University("NaUKMA");
+
+        Faculty fi = new Faculty("fi");
+        ukma.addFaculty(fi);
+        Faculty fsnst = new Faculty("fsnst");
+        ukma.addFaculty(fsnst);
+        Faculty fen = new Faculty("fen");
+        ukma.addFaculty(fen);
+
+        System.out.println(ukma);
 
 
 
