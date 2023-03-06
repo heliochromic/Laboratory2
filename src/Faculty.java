@@ -12,7 +12,7 @@ public class Faculty {
     }
 
     public void addDepartment(Department d) {
-        Department[] tempArr = new Department[departments.length];
+        Department[] tempArr = new Department[departments.length + 1];
         System.arraycopy(departments, 0, tempArr, 0, departments.length);
         departments = tempArr;
         departments[departments.length - 1] = d;
