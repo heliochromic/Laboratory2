@@ -186,9 +186,9 @@ public class Department {
         StringBuilder temp = new StringBuilder("Department:" + name + "\n" + "List of students and professors:\n");
         for (Person person : people) {
             if (person.getClass().getSimpleName().equals("Student")) {
-                temp.append("Student: ").append(person.fullName).append(", course: ").append(((Student) person).getCourse()).append(", group: ").append(((Student) person).getGroup());
+                temp.append("Student: ").append(person.fullName).append(", course: ").append(((Student) person).getCourse()).append(", group: ").append(((Student) person).getGroup()).append("\n");
             } else {
-                temp.append("Professor: ").append(person.fullName).append(", discipline: ").append(((Professor) person).getDiscipline());
+                temp.append("Professor: ").append(person.fullName).append(", discipline: ").append(((Professor) person).getDiscipline()).append("\n");
             }
         }
         return String.valueOf(temp);

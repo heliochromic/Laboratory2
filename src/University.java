@@ -187,6 +187,13 @@ public class University {
         return "Unfortunately, there is no professor with such name";
     }
 
+    public String personToString(Person[] people){
+        StringBuilder temp = new StringBuilder("Sorted array:\n");
+        for(Person person:people){
+            temp.append(person).append("\n");
+        }
+        return String.valueOf(temp);
+    }
     @Override
     public String toString() {
         StringBuilder temp = new StringBuilder("University: " + name + "\n" + "Faculties:\n");
