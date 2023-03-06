@@ -26,7 +26,7 @@ public class Department {
         do {
             //String position = DataInput.getString();
             doPositionEntered = false;
-            switch (DataInput.getString("Do you want to enter \"student\" of \"professor\"")) {
+            switch (DataInput.getString("Do you want to enter \"student\" or \"professor\"").toLowerCase()) {
                 case "student" -> {
                     Student temp = null;
                     String fullName = DataInput.getString("Enter full name");
@@ -66,7 +66,7 @@ public class Department {
             if (person.fullName.equals(p.fullName)) {
                 switch (String.valueOf(person.getClass()).split(Pattern.quote(" "))[1]) {
                     case "Professor" -> {
-                        String field = DataInput.getString("Which field in professor's information do you want to change(name, discipline): ");
+                        String field = DataInput.getString("Which field in professor's information do you want to change(name, discipline): ").toLowerCase();
                         switch (field) {
                             case "name" -> {
                                 p.fullName = DataInput.getString("Enter new name: ");
