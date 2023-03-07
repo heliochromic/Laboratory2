@@ -204,6 +204,7 @@ public class Faculty {
         return String.valueOf(temp);
     }
 
+
     @Override
     public String toString() {
         StringBuilder temp = new StringBuilder("Faculty: " + name + "\n" + "Departments:\n");
