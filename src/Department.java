@@ -183,6 +183,7 @@ public class Department {
 
     public String personToString(Person[] people){
         StringBuilder temp = new StringBuilder("Sorted array:\n");
+        if (people.length == 0) return "unfortunately, there is no "+people.getClass().getSimpleName().toLowerCase()+" in this department";
         for(Person person:people){
             temp.append(person).append("\n");
         }

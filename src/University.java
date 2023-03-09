@@ -189,6 +189,7 @@ public class University {
 
     public String personToString(Person[] people){
         StringBuilder temp = new StringBuilder("Sorted array:\n");
+        if (people.length == 0) return "unfortunately, there is no "+people.getClass().getSimpleName().toLowerCase()+" in this university";
         for(Person person:people){
             temp.append(person).append("\n");
         }
