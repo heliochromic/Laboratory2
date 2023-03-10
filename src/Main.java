@@ -155,7 +155,7 @@ public class Main {
                             String name;
                             do {
                                 name = DataInput.getString("Enter the name of the new faculty ").toUpperCase();
-                                if (Arrays.asList(university.faculties).contains(university.getFaculty(name))) {
+                                if (Arrays.asList(university.faculties).contains(university.getFaculty(name.toUpperCase()))) {
                                     System.out.println("Such faculty already exists");
                                     break outerloop;
                                 }
