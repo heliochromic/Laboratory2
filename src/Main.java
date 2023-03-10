@@ -188,6 +188,7 @@ public class Main {
                             String reask = DataInput.getString("Are you sure you want to delete the faculty? ").toLowerCase();
                             if (reask.equals(agree)) {
                                 university.removeFaculty(university.getFaculty(removeFac.toUpperCase()));
+                                System.out.println("You have successfully deleted the faculty! Now we have: "+university);
                             }
                         } else {
                             System.out.println("You entered a non-existent faculty");
