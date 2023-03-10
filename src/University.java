@@ -25,6 +25,15 @@ public class University {
         if(count!=0)return true;
         else return false;
     }
+    public Faculty getFaculty(String name) {
+        for (Faculty f : this.faculties){
+            if (f.name.equals(name.toUpperCase())){
+                return f;
+            }
+        }
+        return null;
+    }
+
     public void removeFaculty(Faculty f) {
         Faculty[] tempArr = new Faculty[faculties.length - 1];
         System.arraycopy(faculties, 0, tempArr, 0, tempArr.length - 1);
@@ -38,7 +47,7 @@ public class University {
     }
     public void editFaculty(Faculty f) throws IOException {
         for (Faculty faculty : faculties) {
-            if (faculty.name.equals(f.name)) {
+            if (faculty.name.equals(f.name.toUpperCase())) {
                 f.name = DataInput.getString("Enter new faculty name: ");
             }
         }
