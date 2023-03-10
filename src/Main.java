@@ -104,8 +104,9 @@ public class Main {
                             changeFaculty(university);
                             break;
                         case 5:
-                            sortByCouse(university);
+                            sortByCourse(university);
                             break;
+                        case 6: printallAlf(university); break;
 
                     }
                 }
@@ -124,7 +125,34 @@ public class Main {
 //        System.out.println(fi.personToString(sortedByNameListOfStudents));
     }
 
-    private static void sortByCouse(University university) {
+    private static void printallAlf(University university) throws IOException {
+        String dep;
+        do {
+            dep=DataInput.getString("Please enter name of the faculty  in which you want to see the list of persons(" + university + ") :").toUpperCase();;
+        }while(dep.isEmpty());
+        boolean contain = university.findFaculty(dep);
+        if(contain){
+            boolean doPositionEntered;
+            do {
+                doPositionEntered = false;
+                switch (DataInput.getString("Do you want to enter \"student\" or \"professor\"").toLowerCase()) {
+                    case "student" -> {
+                        Student[] sortedByNameListOfStudents = university.getFaculty(dep).sortFacultyStudentsByName();
+                        System.out.println(university.getFaculty(dep).personToString(sortedByNameListOfStudents));
+
+                    }
+                    case "professor" -> {
+                        Professor [] sortedByNameListOfProfessor=university.getFaculty(dep).sortFacultyProfessorByName();
+                        System.out.println(university.getFaculty(dep).personToString(sortedByNameListOfProfessor));
+                    }
+                    default -> doPositionEntered = true;
+                }
+            } while (doPositionEntered);
+
+        }else System.out.println("You entered a non-existent faculty");
+    }
+
+    private static void sortByCourse(University university) {
         System.out.println("All student sort by course: ");
         Student[] yug = university.sortUniStudentsByCourse();
         System.out.println(university.personToString(yug));
@@ -193,7 +221,21 @@ public class Main {
                         } else {
                             System.out.println("You entered a non-existent faculty");
                         }
-
+                    }
+                    if (act==3){
+                        String editFac = DataInput.getString("Please enter name of the faculty what you want edit(" + university + ") :").toUpperCase();
+                        while (editFac.isEmpty())
+                            editFac = DataInput.getString("Please enter name of the faculty what you want edit(" + university + ") :").toUpperCase();
+                        boolean contain = university.findFaculty(editFac);
+                        if (contain) {
+                            String reask = DataInput.getString("Are you sure you want to edit the faculty? ").toLowerCase();
+                            if (reask.equals("yes")) {
+                                university.editFaculty(university.getFaculty(editFac));
+                                System.out.println("You have successfully edited the faculty! Now we have: "+university);
+                            }
+                        } else {
+                            System.out.println("You entered a non-existent faculty");
+                        }
                     }
                     circle = DataInput.getInt("Enter 1 to repeat choosing actions with faculties: ");
                     repeat = false;

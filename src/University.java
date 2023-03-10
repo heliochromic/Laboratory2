@@ -48,7 +48,10 @@ public class University {
     public void editFaculty(Faculty f) throws IOException {
         for (Faculty faculty : faculties) {
             if (faculty.name.equals(f.name.toUpperCase())) {
-                f.name = DataInput.getString("Enter new faculty name: ");
+                String newName=DataInput.getString("Please enter new faculty name: ").toUpperCase();
+                while(newName.isEmpty())newName=DataInput.getString("Please enter new faculty name: ").toUpperCase();
+                f.name =newName;
+
             }
         }
     }
