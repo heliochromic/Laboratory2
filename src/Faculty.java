@@ -198,6 +198,8 @@ public class Faculty {
 
     public String personToString(Person[] people){
         StringBuilder temp = new StringBuilder("Sorted array:\n");
+        if (people.length == 0)
+            return "unfortunately, there is no " + people.getClass().getSimpleName().toLowerCase() + " in this faculty";
         for(Person person:people){
             temp.append(person).append("\n");
         }
