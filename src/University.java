@@ -17,7 +17,15 @@ public class University {
         faculties = tempArr;
         faculties[faculties.length - 1] = f;
     }
-    public void removeDepartment(Faculty f) {
+    public boolean findFaculty(String name){
+        int count=0;
+        for (Faculty faculty: faculties) {
+            if (faculty.name.equals(name)) count++;
+        }
+        if(count!=0)return true;
+        else return false;
+    }
+    public void removeFaculty(Faculty f) {
         Faculty[] tempArr = new Faculty[faculties.length - 1];
         System.arraycopy(faculties, 0, tempArr, 0, tempArr.length - 1);
         int k = 0;
@@ -28,7 +36,7 @@ public class University {
         }
         faculties = tempArr;
     }
-    public void editDepartment(Faculty f) throws IOException {
+    public void editFaculty(Faculty f) throws IOException {
         for (Faculty faculty : faculties) {
             if (faculty.name.equals(f.name)) {
                 f.name = DataInput.getString("Enter new faculty name: ");

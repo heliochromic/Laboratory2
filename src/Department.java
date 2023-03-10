@@ -29,9 +29,12 @@ public class Department {
             switch (DataInput.getString("Do you want to enter \"student\" or \"professor\"").toLowerCase()) {
                 case "student" -> {
                     Student temp = null;
-                    String fullName = DataInput.getString("Enter full name");
+                    String fullName = DataInput.getString("Enter full name ");
+                    while(fullName.isEmpty())fullName = DataInput.getString("Enter full name ");
                     int course = DataInput.getInt("Enter course");
+                    while(course<1||course>6)course = DataInput.getInt("Enter course");
                     int group = DataInput.getInt("Enter group");
+                    while (group<0)group = DataInput.getInt("Enter group");
                     //people[people.length - 1] = new Student(fullName, 0, group);
                     temp = new Student(fullName, 0, group);
                     temp.setCourse(course);
@@ -40,7 +43,9 @@ public class Department {
                 case "professor" -> {
                     Professor temp = null;
                     String fullName = DataInput.getString("Enter full name");
+                    while(fullName.isEmpty())fullName = DataInput.getString("Enter full name ");
                     String discipline = DataInput.getString("Enter discipline name");
+                    while(discipline.isEmpty())discipline = DataInput.getString("Enter discipline name");
                     people[people.length - 1] = new Professor(fullName, discipline);
                 }
                 default -> doPositionEntered = true;
