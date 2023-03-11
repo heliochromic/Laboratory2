@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.regex.Pattern;
 
 public class Main {
@@ -256,9 +257,10 @@ public class Main {
                                 while (course < 1 || course > 6) course = DataInput.getInt("Enter course");
                                 rep=false;
                             }catch (NumberFormatException no) {System.out.println("Please, enter correct value!!");}}
-                        Student[] sotrtStudDepByCourse = university.getFaculty(fac).getDepartment(dep).getStudentsByCourse(course);
+                            Student[] sortStudDepByCourse = university.getFaculty(fac).getDepartment(dep).getStudentsByCourse(course);
+                            Arrays.sort(sortStudDepByCourse, Comparator.comparing(a -> a.fullName));
                         //*********як сортувати за алфавітом чи є метод
-                        System.out.println(university.getFaculty(fac).getDepartment(dep).personToString(sotrtStudDepByCourse));
+                        System.out.println(university.personToString(sortStudDepByCourse));
                         String ask=DataInput.getString("Do you want retry? ");
                         while(ask.isEmpty())ask=DataInput.getString("Do you want retry? ");
                         if(ask.equals("yes"))cicle=false;
