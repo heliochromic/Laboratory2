@@ -20,7 +20,11 @@ public class Faculty {
 
     public void removeDepartment(Department d) {
         Department[] tempArr = new Department[departments.length - 1];
-        System.arraycopy(departments, 0, tempArr, 0, tempArr.length - 1);
+        if (this.departments.length > 1){
+            System.arraycopy(departments, 0, tempArr, 0, tempArr.length - 1);
+        } else {
+            System.arraycopy(departments, 0, tempArr, 0, tempArr.length);
+        }
         int k = 0;
         for (Department department : departments) {
             if (department.name.equals(d.name)) continue;
@@ -49,9 +53,7 @@ public class Faculty {
     public void editDepartment(Department d) throws IOException {
         for (Department department : departments) {
             if (department.name.equals(d.name)) {
-                String newName= DataInput.getString("Enter new department name: ");
-               while(newName.isEmpty())newName= DataInput.getString("Enter new department name: ");
-                d.name =newName;
+                d.name = DataInput.getString("Enter new department name: ");
             }
         }
     }
