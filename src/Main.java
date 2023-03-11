@@ -326,23 +326,30 @@ public class Main {
         int circle = 1;
         boolean repeat = true;
         while (repeat) {
+
             try {
                 while (circle == 1) {
                     System.out.println("Сhoose which actions you want to implement on the faculty: ");
-                    int act = DataInput.getInt("1- create new faculty \n" +
+                    int act = DataInput.getInt("1-create new faculty \n" +
                             "2-delete faculty\n" +
                             "3-edit faculty");
                     while (act < 1 || act > 3) {
-                        act = DataInput.getInt("1- create new faculty \n" +
+                        act = DataInput.getInt("1-create new faculty \n" +
                                 "2-delete faculty\n" +
                                 "3-edit faculty");
                     }
+                    outerloop:
                     if (act == 1) {
                         int rep = 1;
                         while (rep == 1) {
-                            String name = DataInput.getString("Enter the name of the new faculty ").toUpperCase();
-                            while (name.isEmpty())
+                            String name;
+                            do {
                                 name = DataInput.getString("Enter the name of the new faculty ").toUpperCase();
+                                if (Arrays.asList(university.faculties).contains(university.getFaculty(name.toUpperCase()))) {
+                                    System.out.println("Such faculty already exists");
+                                    break outerloop;
+                                }
+                            } while (name.isEmpty());
                             Faculty newFac = new Faculty(name);
                             university.addFaculty(newFac);
                             int kolo = 1;
