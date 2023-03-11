@@ -17,6 +17,22 @@ public class Department {
         people = tempArr;
         people[people.length - 1] = p;
     }
+    public Person getPerson(String name) {
+        for (Person p : this.people){
+            if (p.fullName.equals(name)){
+                return p;
+            }
+        }
+        return null;
+    }
+    public boolean findPerson(String name){
+        int count=0;
+        for (Person p : people) {
+            if (p.fullName.equals(name)) count++;
+        }
+        if(count!=0)return true;
+        else return false;
+    }
 
     public void addPersonFromConsole() throws IOException {
         Person[] tempArr = new Person[people.length + 1];
@@ -90,13 +106,17 @@ public class Department {
                         String field = DataInput.getString("Which field in professor's information do you want to change(name, discipline): ").toLowerCase();
                         switch (field) {
                             case "name" -> {
-                                p.fullName = DataInput.getString("Enter new name: ");
+                                String newName;
+                                do {
+                                     newName = DataInput.getString("Enter new name: ");
+                                }while(newName.isEmpty());
+                                p.fullName=newName;
                             }
                             case "discipline" -> {
                                 Professor temp = (Professor) p;
                                 temp.setDiscipline(DataInput.getString("Enter new course: "));
                             }
-                            default -> System.out.println("fuck you, can write method with first time");
+                            default -> System.out.println("you entered invalid value!!");
                         }
 
                     }
@@ -106,7 +126,11 @@ public class Department {
                         String field = DataInput.getString("Which field in student's information do you want to change(name, course, group): ");
                         switch (field) {
                             case "name" -> {
-                                p.fullName = DataInput.getString("Enter new name: ");
+                                String newName;
+                                do {
+                                    newName = DataInput.getString("Enter new name: ");
+                                }while(newName.isEmpty());
+                                p.fullName=newName;
                             }
                             case "course" -> {
                                 Student temp = (Student) p;
@@ -116,12 +140,12 @@ public class Department {
                                 Student temp = (Student) p;
                                 temp.setGroup(DataInput.getInt("Enter new group: "));
                             }
-                            default -> System.out.println("fuck you, can write method with first time");
+                            default -> System.out.println("you entered invalid value!!");
                         }
                     }
-                    default -> throw new Exception("shit happens");
+                    default -> throw new Exception("you entered invalid value!!");
                 }
-            }
+            }else System.out.println("You entered a non-existent person");
         }
     }
 
