@@ -29,6 +29,22 @@ public class Faculty {
         }
         departments = tempArr;
     }
+    public Department getDepartment(String name) {
+        for (Department d : this.departments){
+            if (d.name.equals(name)){
+                return d;
+            }
+        }
+        return null;
+    }
+    public boolean findDepartment(String name){
+        int count=0;
+        for (Department d: departments) {
+            if (d.name.equals(name)) count++;
+        }
+        if(count!=0)return true;
+        else return false;
+    }
 
     public void editDepartment(Department d) throws IOException {
         for (Department department : departments) {

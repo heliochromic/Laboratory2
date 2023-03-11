@@ -107,6 +107,10 @@ public class Main {
                             sortByCourse(university);
                             break;
                         case 6: printallAlf(university); break;
+                        case 7: studDepByCourse(university); break;
+                        case 8: printAllDepAlf(university); break;
+                        case 9: printAllStByCourse(university);break;
+                        case 10:printAllStByCourseAlf(university);break;
 
                     }
                 }
@@ -123,6 +127,164 @@ public class Main {
 //
 //        Student[] sortedByNameListOfStudents = fi.sortFacultyStudentsByName();
 //        System.out.println(fi.personToString(sortedByNameListOfStudents));
+    }
+
+    private static void printAllStByCourseAlf(University university) throws IOException {
+        String dep;
+        String fac;
+        int course=0;
+        do {
+            fac=DataInput.getString("Please enter name of the faculty  in which you want to see the list of students by course(" + university + ") :").toUpperCase();;
+        }while(fac.isEmpty());
+        boolean contain = university.findFaculty(fac);
+        if(contain){
+            boolean circle=true;
+            do {
+                do {
+                    dep = DataInput.getString("Please enter name of the department in which you want to see the list of students by course " + university.getFaculty(fac));
+                } while (dep.isEmpty());
+                boolean present = university.getFaculty(fac).findDepartment(dep);
+                if (present) {
+                    boolean cicle;
+                    do {
+                        boolean rep=true;
+                        while(rep){
+                            try {
+                                course = DataInput.getInt("Enter course what you want to find : ");
+                                while (course < 1 || course > 6) course = DataInput.getInt("Enter course");
+                                rep=false;
+                            }catch (NumberFormatException no) {System.out.println("Please, enter correct value!!");}}
+                        Student[] sotrtStudDepByCourse = university.getFaculty(fac).getDepartment(dep).getStudentsByCourse(course);
+                        //*********як сортувати за алфавітом чи є метод
+                        System.out.println(university.getFaculty(fac).getDepartment(dep).personToString(sotrtStudDepByCourse));
+                        String ask=DataInput.getString("Do you want retry? ");
+                        while(ask.isEmpty())ask=DataInput.getString("Do you want retry? ");
+                        if(ask.equals("yes"))cicle=false;
+                        else cicle=true;
+                    }while(!cicle);
+                    String retry=DataInput.getString("Do you want to change the department of faculty? ");
+                    while(retry.isEmpty())retry=DataInput.getString("Do you want to change the department of faculty? ");
+                    if(retry.equals("yes"))circle=true;
+                    else  circle=false;
+                } else System.out.println("You entered a non-existent department");
+            }while(circle);
+        }else System.out.println("You entered a non-existent faculty");
+
+    }
+
+    private static void printAllStByCourse(University university) throws IOException {
+        String dep;
+        String fac;
+        int course=0;
+        do {
+            fac=DataInput.getString("Please enter name of the faculty  in which you want to see the list of students by course(" + university + ") :").toUpperCase();;
+        }while(fac.isEmpty());
+        boolean contain = university.findFaculty(fac);
+        if(contain){
+            boolean circle=true;
+            do {
+                do {
+                    dep = DataInput.getString("Please enter name of the department in which you want to see the list of students by course " + university.getFaculty(fac));
+                } while (dep.isEmpty());
+                boolean present = university.getFaculty(fac).findDepartment(dep);
+                if (present) {
+                    boolean cicle;
+                    do {
+                    boolean rep=true;
+                    while(rep){
+                    try {
+                         course = DataInput.getInt("Enter course what you want to find : ");
+                        while (course < 1 || course > 6) course = DataInput.getInt("Enter course");
+                        rep=false;
+                    }catch (NumberFormatException no) {System.out.println("Please, enter correct value!!");}}
+                    Student[] sotrtStudDepByCourse = university.getFaculty(fac).getDepartment(dep).getStudentsByCourse(course);
+                    System.out.println(university.getFaculty(fac).getDepartment(dep).personToString(sotrtStudDepByCourse));
+                        String ask=DataInput.getString("Do you want retry? ");
+                        while(ask.isEmpty())ask=DataInput.getString("Do you want retry? ");
+                        if(ask.equals("yes"))cicle=false;
+                        else cicle=true;
+                    }while(!cicle);
+                    String retry=DataInput.getString("Do you want to change the department of faculty? ");
+                    while(retry.isEmpty())retry=DataInput.getString("Do you want to change the department of faculty? ");
+                    if(retry.equals("yes"))circle=true;
+                    else  circle=false;
+                } else System.out.println("You entered a non-existent department");
+            }while(circle);
+        }else System.out.println("You entered a non-existent faculty");
+
+    }
+
+    private static void printAllDepAlf(University university) throws IOException {
+        String dep;
+        String fac;
+        do {
+            fac=DataInput.getString("Please enter name of the faculty  in which you want to see the list of students by course(" + university + ") :").toUpperCase();;
+        }while(fac.isEmpty());
+        boolean contain = university.findFaculty(fac);
+        if(contain){
+            boolean circle=true;
+            do {
+                do {
+                    dep = DataInput.getString("Please enter name of the department in which you want to see the list of students by course " + university.getFaculty(fac));
+                } while (dep.isEmpty());
+                boolean present = university.getFaculty(fac).findDepartment(dep);
+                if (present) {
+                    boolean cicle;
+                    do {
+                        boolean doPositionEntered;
+                        do {
+                            doPositionEntered = false;
+                            switch (DataInput.getString("Do you want to enter \"student\" or \"professor\"").toLowerCase()) {
+                                case "student" -> {
+                                    Student[] sortedByNameListOfStudentsDep = university.getFaculty(fac).getDepartment(dep).sortStudentsByName();
+                                    System.out.println(university.getFaculty(fac).getDepartment(dep).personToString(sortedByNameListOfStudentsDep));
+
+                                }
+                                case "professor" -> {
+                                    Professor[] sortedByNameListOfProfessorDep = university.getFaculty(fac).getDepartment(dep).sortProfessorsByName();
+                                    System.out.println(university.getFaculty(fac).getDepartment(dep).personToString(sortedByNameListOfProfessorDep));
+                                }
+                                default -> doPositionEntered = true;
+                            }
+                        } while (doPositionEntered);
+                        String ask=DataInput.getString("Do you want retry? ");
+                        while(ask.isEmpty())ask=DataInput.getString("Do you want retry? ");
+                        if(ask.equals("yes"))cicle=false;
+                        else cicle=true;
+                    }while(!cicle);
+                    String retry=DataInput.getString("Do you want to change the department of faculty? ");
+                    while(retry.isEmpty())retry=DataInput.getString("Do you want to change the department of faculty? ");
+                    if(retry.equals("yes"))circle=true;
+                    else  circle=false;
+                } else System.out.println("You entered a non-existent department");
+            }while(circle);
+        }else System.out.println("You entered a non-existent faculty");
+
+    }
+
+
+    private static void studDepByCourse(University university) throws IOException {
+        String dep;
+        String fac;
+        do {
+            fac=DataInput.getString("Please enter name of the faculty  in which you want to see the list of students by course(" + university + ") :").toUpperCase();;
+        }while(fac.isEmpty());
+        boolean contain = university.findFaculty(fac);
+        if(contain){
+            boolean circle=true;
+            do {
+                do {
+                    dep = DataInput.getString("Please enter name of the department in which you want to see the list of students by course " + university.getFaculty(fac));
+                } while (dep.isEmpty());
+                boolean present = university.getFaculty(fac).findDepartment(dep);
+                if (present) {
+                    Student[] sotrtStudDepByCourse = university.getFaculty(fac).getDepartment(dep).sortStudentsByCourse();
+                    System.out.println(university.getFaculty(fac).getDepartment(dep).personToString(sotrtStudDepByCourse));
+                    circle=false;
+                } else System.out.println("You entered a non-existent department");
+            }while(circle);
+        }else System.out.println("You entered a non-existent faculty");
+
     }
 
     private static void printallAlf(University university) throws IOException {
@@ -193,7 +355,8 @@ public class Main {
                                 System.out.println("Now we must to add person to the department : ");
                                 String suggest = "yes";
                                 while (suggest.equals("yes")) {
-                                    newDep.addPersonFromConsole();
+
+                                        newDep.addPersonFromConsole();
                                     suggest = DataInput.getString("Do you want to repeat adding person? ").toLowerCase();
                                 }
                                 System.out.println(newDep);
