@@ -36,7 +36,11 @@ public class University {
 
     public void removeFaculty(Faculty f) {
         Faculty[] tempArr = new Faculty[faculties.length - 1];
-        System.arraycopy(faculties, 0, tempArr, 0, tempArr.length - 1);
+        if (this.faculties.length > 1){
+            System.arraycopy(faculties, 0, tempArr, 0, tempArr.length - 1);
+        } else {
+            System.arraycopy(faculties, 0, tempArr, 0, tempArr.length);
+        }
         int k = 0;
         for (Faculty faculty: faculties) {
             if (faculty.name.equals(f.name)) continue;
@@ -152,6 +156,19 @@ public class University {
                 for (Person p : department.people) {
                     if (name.equals(p.fullName) &&
                             String.valueOf(p.getClass()).split(Pattern.quote(" "))[1].equals("Student")) {
+                        return "faculty: "+faculty.name+", department: " + department.name + ", student by name: " + p.fullName + ", course: " + ((Student) p).getCourse() + ", group: " + ((Student) p).getGroup();
+                    }
+                }
+            }
+        }
+        return "Unfortunately, there is no student with such name";
+    }
+    public String findProfessorByName(String name) {
+        for (Faculty faculty : this.faculties){
+            for (Department department : faculty.departments) {
+                for (Person p : department.people) {
+                    if (name.equals(p.fullName) &&
+                            String.valueOf(p.getClass()).split(Pattern.quote(" "))[1].equals("Professor")) {
                         return "faculty: "+faculty.name+", department: " + department.name + ", student by name: " + p.fullName + ", course: " + ((Student) p).getCourse() + ", group: " + ((Student) p).getGroup();
                     }
                 }

@@ -205,8 +205,6 @@ public class Main {
                                                     System.out.println(" Something comes wrong...");
                                                 }
                                             }
-
-
                                         }
                                         case "professor" -> {
 
