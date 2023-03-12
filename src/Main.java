@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.regex.Pattern;
 
 public class Main {
@@ -479,6 +480,7 @@ public class Main {
                             try {
                                 course = DataInput.getInt("Enter course what you want to find : ");
                                 while (course < 1 || course > 6) course = DataInput.getInt("Enter course");
+<<<<<<< HEAD
                                 rep = false;
                             } catch (NumberFormatException no) {
                                 System.out.println("Please, enter correct value!!");
@@ -497,6 +499,23 @@ public class Main {
                         retry = DataInput.getString("Do you want to change the department of faculty? ");
                     if (retry.equals("yes")) circle = true;
                     else circle = false;
+=======
+                                rep=false;
+                            }catch (NumberFormatException no) {System.out.println("Please, enter correct value!!");}}
+                            Student[] sortStudDepByCourse = university.getFaculty(fac).getDepartment(dep).getStudentsByCourse(course);
+                            Arrays.sort(sortStudDepByCourse, Comparator.comparing(a -> a.fullName));
+                        //*********як сортувати за алфавітом чи є метод
+                        System.out.println(university.personToString(sortStudDepByCourse));
+                        String ask=DataInput.getString("Do you want retry? ");
+                        while(ask.isEmpty())ask=DataInput.getString("Do you want retry? ");
+                        if(ask.equals("yes"))cicle=false;
+                        else cicle=true;
+                    }while(!cicle);
+                    String retry=DataInput.getString("Do you want to change the department of faculty? ");
+                    while(retry.isEmpty())retry=DataInput.getString("Do you want to change the department of faculty? ");
+                    if(retry.equals("yes"))circle=true;
+                    else  circle=false;
+>>>>>>> origin
                 } else System.out.println("You entered a non-existent department");
             } while (circle);
         } else System.out.println("You entered a non-existent faculty");
