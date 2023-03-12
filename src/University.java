@@ -169,7 +169,7 @@ public class University {
                 for (Person p : department.people) {
                     if (name.equals(p.fullName) &&
                             String.valueOf(p.getClass()).split(Pattern.quote(" "))[1].equals("Professor")) {
-                        return "faculty: "+faculty.name+", department: " + department.name + ", student by name: " + p.fullName + ", course: " + ((Student) p).getCourse() + ", group: " + ((Student) p).getGroup();
+                        return "university: "+faculty.name+", department: " + department.name + ", professor by name: " + p.fullName + ", his/her discipline: " + ((Professor) p).getDiscipline();
                     }
                 }
             }
@@ -181,10 +181,12 @@ public class University {
         for (Faculty faculty : this.faculties){
             for (Department department : faculty.departments) {
                 for (Person p : department.people) {
-                    if (group == ((Student) p).getGroup() && String.valueOf(p.getClass()).split(Pattern.quote(" "))[1].equals("Student")) {
-                        int i = 1;
-                        i++;
-                        temp = new Student[i];
+                    if (String.valueOf(p.getClass()).split(Pattern.quote(" "))[1].equals("Professor")) continue;
+                    if (group == ((Student) p).getCourse()) {
+                        Student[] sec = new Student[temp.length];
+                        System.arraycopy(temp, 0, sec,0,temp.length);
+                        temp = new Student[sec.length+1];
+                        System.arraycopy(sec, 0, temp,0,temp.length-1);
                         temp[temp.length - 1] = (Student) p;
                     }
                 }
@@ -199,10 +201,12 @@ public class University {
         for (Faculty faculty : this.faculties){
             for (Department department : faculty.departments) {
                 for (Person p : department.people) {
-                    if (course == ((Student) p).getCourse() && String.valueOf(p.getClass()).split(Pattern.quote(" "))[1].equals("Student")) {
-                        int i = 1;
-                        i++;
-                        temp = new Student[i];
+                    if (String.valueOf(p.getClass()).split(Pattern.quote(" "))[1].equals("Professor")) continue;
+                    if (course == ((Student) p).getCourse()) {
+                        Student[] sec = new Student[temp.length];
+                        System.arraycopy(temp, 0, sec,0,temp.length);
+                        temp = new Student[sec.length+1];
+                        System.arraycopy(sec, 0, temp,0,temp.length-1);
                         temp[temp.length - 1] = (Student) p;
                     }
                 }
@@ -214,8 +218,8 @@ public class University {
         for (Faculty faculty : this.faculties){
             for (Department department : faculty.departments) {
                 for (Person p : department.people) {
-                    if (name.equals(((Professor) p).getDiscipline()) &&
-                            String.valueOf(p.getClass()).split(Pattern.quote(" "))[1].equals("Professor")) {
+                    if (String.valueOf(p.getClass()).split(Pattern.quote(" "))[1].equals("Student"))continue;
+                    if (discipline.equals(((Professor) p).getDiscipline())){
                         return "university: "+faculty.name+", department: " + department.name + ", professor by name: " + p.fullName + ", his/her discipline: " + ((Professor) p).getDiscipline();
                     }
                 }
