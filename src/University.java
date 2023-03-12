@@ -54,8 +54,11 @@ public class University {
             if (faculty.name.equals(f.name.toUpperCase())) {
                 String newName=DataInput.getString("Please enter new faculty name: ").toUpperCase();
                 while(newName.isEmpty())newName=DataInput.getString("Please enter new faculty name: ").toUpperCase();
+                if (Arrays.asList(this.faculties).contains(this.getFaculty(name.toUpperCase()))) {
+                    System.out.println("Such faculty already exists");
+                    break;
+                }
                 f.name =newName;
-
             }
         }
     }

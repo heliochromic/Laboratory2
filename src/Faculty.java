@@ -55,7 +55,13 @@ public class Faculty {
     public void editDepartment(Department d) throws IOException {
         for (Department department : departments) {
             if (department.name.equals(d.name)) {
-                d.name = DataInput.getString("Enter new department name: ");
+                String newName=DataInput.getString("Please enter new department name: ").toUpperCase();
+                while(newName.isEmpty())newName=DataInput.getString("Please enter new department name: ").toUpperCase();
+                if (Arrays.asList(this.departments).contains(this.getDepartment(name))) {
+                    System.out.println("Such department already exists");
+                    break;
+                }
+                d.name = newName;
             }
         }
     }

@@ -113,6 +113,10 @@ public class Department {
                                 do {
                                      newName = DataInput.getString("Enter new name: ");
                                 }while(newName.isEmpty());
+                                if (Arrays.asList(this.people).contains(this.getPerson(newName))) {
+                                    System.out.println("Such professor already exists");
+                                    break;
+                                }
                                 p.fullName=newName;
                             }
                             case "discipline" -> {
@@ -131,6 +135,10 @@ public class Department {
                                 do {
                                     newName = DataInput.getString("Enter new name: ");
                                 }while(newName.isEmpty());
+                                if (Arrays.asList(this.people).contains(this.getPerson(newName))) {
+                                    System.out.println("Such student already exists");
+                                    break;
+                                }
                                 p.fullName=newName;
                             }
                             case "course" -> {
