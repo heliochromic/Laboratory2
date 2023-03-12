@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.regex.Pattern;
 
 public class Main {
@@ -511,7 +512,7 @@ public class Main {
                             }
                         }
                         Student[] sotrtStudDepByCourse = university.getFaculty(fac).getDepartment(dep).getStudentsByCourse(course);
-                        //*********як сортувати за алфавітом чи є метод
+                        Arrays.sort(sotrtStudDepByCourse, Comparator.comparing(a->a.fullName));
                         System.out.println(university.getFaculty(fac).getDepartment(dep).personToString(sotrtStudDepByCourse));
                         String ask = DataInput.getString("Do you want retry? ");
                         while (ask.isEmpty()) ask = DataInput.getString("Do you want retry? ");
