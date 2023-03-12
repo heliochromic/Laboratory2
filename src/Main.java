@@ -21,10 +21,12 @@ public class Main {
         Department mathematics = new Department("Department of Mathematics");
         Department informatics = new Department("Department of Informatics");
         Department ir = new Department("Department of International relations");
+        Department economics = new Department("Department of Economics");
 
         fi.addDepartment(mathematics);
         fi.addDepartment(informatics);
         fsnst.addDepartment(ir);
+        fen.addDepartment(economics);
 
 //        System.out.println(fi);
 //
@@ -43,6 +45,11 @@ public class Main {
         Student emmaBrown = new Student("Emma Brown", 2, 1);
         Student davidFord = new Student("David Ford", 4, 1);
         Student markBell = new Student("Mark Bell", 2, 5);
+        Student jamesHolywan = new Student("James Holywan", 1, 4);
+        Student alinaKrupianyk = new Student("Aline Krupianyk", 2,1);
+        Student iosivStalin = new Student("Iosiv Stalin", 1, 5);
+        Student ibrahimSalihMohammedAl_Yacoub = new Student("Ibrahim Salih Mohammed Al-Yacoub", 4, 2);
+
 
         Professor frankGarcia = new Professor("Frank Garcia", "Algebra");
         Professor johnIngram = new Professor("John Ingram", "Programming in java");
@@ -50,6 +57,7 @@ public class Main {
         Professor frankieHarris = new Professor("Frankie Harris", "Computer algorithms");
         Professor thomYorke = new Professor("Thom Yorke", "Relations with russia terrorist state");
         Professor conanGrey = new Professor("Conan Grey", "Understanding jokes of others cultures");
+        Professor denisPushilin = new Professor("Denis Pushilin", "Science of economics cooperation with collaborators");
 
 
         informatics.addPerson(emmaGarcia);
@@ -82,6 +90,13 @@ public class Main {
 
         ir.addPerson(thomYorke);
         ir.addPerson(conanGrey);
+
+        economics.addPerson(alinaKrupianyk);
+        economics.addPerson(ibrahimSalihMohammedAl_Yacoub);
+        economics.addPerson(iosivStalin);
+        economics.addPerson(jamesHolywan);
+
+        economics.addPerson(denisPushilin);
         int circle = 1;
         boolean check = true;
         while (check) {
