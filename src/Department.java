@@ -121,7 +121,7 @@ public class Department {
 
                     }
                     case "Student" -> {
-                        //System.out.println(Arrays.toString(p.getClass().getDeclaredFields()));
+                        System.out.println(Arrays.toString(p.getClass().getDeclaredFields()));
                         //method for choosing value and edit it
                         String field = DataInput.getString("Which field in student's information do you want to change(name, course, group): ");
                         switch (field) {
@@ -145,7 +145,7 @@ public class Department {
                     }
                     default -> throw new Exception("you entered invalid value!!");
                 }
-            }
+            }else System.out.println("You entered a non-existent person");
         }
     }
 
