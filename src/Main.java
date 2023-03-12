@@ -201,6 +201,45 @@ public class Main {
                                             s = DataInput.getString("Want retry looking for student by course?").toLowerCase();
                                         } while (s.equals("yes"));
 
+<<<<<<< HEAD
+=======
+
+                                        }
+                                        case "professor" -> {
+                                            String parameter;
+                                            do {
+                                                parameter  = DataInput.getString("Please enter in which parameter you wand to find professors ( name, discipline) ").toLowerCase();
+                                            }while(parameter.isEmpty());
+                                            switch (parameter){
+                                                default -> {
+                                                    System.out.println(" Something comes wrong...");
+                                                }
+                                                case "name" ->{
+                                                    String s;
+                                                    do{
+                                                        String name;
+                                                        do {
+                                                            name = DataInput.getString("please, enter full name of the professor what you want to find: ");
+                                                        } while ((name.isEmpty()));
+                                                     //   System.out.println(university.);
+                                                        s=DataInput.getString("Want retry looking for student by name?").toLowerCase();
+                                                    }while(s.equals("yes"));
+                                                }
+                                                case "discipline" ->{
+                                                    String s;
+                                                    do{
+                                                        String discipline;
+                                                        do {
+                                                            discipline = DataInput.getString("please, enter  name of the professor's discipline what you want to find: ");
+                                                        } while ((discipline.isEmpty()));
+                                                        System.out.println(university.findProfessorByDiscipline(discipline));
+                                                        s=DataInput.getString("Want retry looking for student by name?").toLowerCase();
+                                                    }while(s.equals("yes"));
+                                                }
+                                            }
+                                        }
+                                        default -> doPositionEntered = true;
+>>>>>>> e4a1ac3dc6b9391fa411137ed1457d348e37dc0e
                                     }
                                     case "group" -> {
                                         String s;
